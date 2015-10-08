@@ -1,0 +1,57 @@
+
+.solidBorder {
+	border: 1px solid black;
+}
+
+.autowidthElem {
+	width: 1px;
+	white-space: nowrap;
+}
+
+.grasElem {
+	font-weight: bold;
+}
+
+.rigthElem {
+	text-align: right;
+}
+
+.bigTable {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 50%;
+}
+
+.playTable {
+	width: 100%;
+}
+
+hr.dashedline {
+	border-top: 2px dashed gray;
+	margin: 2px 5px;
+}
+
+.dashedline {
+	border-top: 2px dashed gray;
+	margin: 2px 5px;
+}
+
+.dashedBorder {
+	border-bottom: dashed;
+	border-bottom-width: 2px;
+	border-bottom-color: gray;
+}
+
+.dashedlineBold {
+	border-bottom: dashed;
+	border-bottom-width: 2px;
+	border-bottom-color: black;
+}
+
+.centerElem {
+	text-align: center;
+}
+
+.blackBorder {
+	border-bottom: 1px solid black;
+}
