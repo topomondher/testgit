@@ -1,3 +1,22 @@
+/*
+// ==UserScript==
+// @name openAllEventsPages
+// @namespace planetfake
+// @version 0.1
+// @grant        none
+// @description Opens all links in the CodeProject newsletter 
+// @match  http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1
+// @copyright 2012+, hibbard.eu
+// @require http://code.jquery.com/jquery-latest.js
+// ==/UserScript==
+
+jQuery(function ($){
+    addButtonClear();
+    addButtonGetData();
+    addButtonTestData();
+});
+*/
+
 function addButtonGetData(){
     $(".tblMenu ul").append('<li id="li_getdata"><a id="btn_getdata"><span id="span_getdata">Data</span></a></li>');
 }
