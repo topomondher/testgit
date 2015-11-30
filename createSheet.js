@@ -1,20 +1,3 @@
-/*
-// ==UserScript==
-// @name         createSimpleSheet
-// @namespace    fakeplanet
-// @version      0.1
-// @description  first
-// @author       You
-// @match        http://www.planetwin365.com/*
-// @grant        none
-// @require http://code.jquery.com/jquery-latest.js
-// @grant    GM_addStyle
-// @grant    GM_getResourceText
-// ==/UserScript==
-*/
-
-var my_CssSrc = GM_getResourceText("my_CSS");
-GM_addStyle(my_CssSrc);
 
 var cssStyle=' .bodernone {	border: none !important;}#mysheetid {	display: none;	font-size: 9px;	width: 700px;	line-height: 7pt;}.imgheader img {	width: 69.9mm;}.imgfooter img {	width: 68.9mm;}table {	border-spacing: 0mm !important;	border-collapse: collapse !important;}.tableHeader td {	font-size: 9.6pt;	font-family: arial;	font-weight: bold;}table td tr {	font-family: arial;	font-size: 8pt;	margin: 0mm !important;	padding: 0mm !important;}span {	margin: 0px;	padding: 0px;}.centerSystemElem {	text-align: center;	white-space: nowrap;	padding-left: 5px;	padding-right: 5px;}.borderRight {	border-right: 1px solid black;}.bordertop {	border-top: 1px solid black;}.textAlighLeft {	text-align: left;}.borderRight {	border-right: 1px solid black;}.borderBotton {	border-bottom: 1px solid black;	font-size: 10px;	text-align: center;	white-space: nowrap;}.textalignRight {	text-align: right;}.solidBorder {	border: 1px solid black;}.autowidthElem {	width: 1px;	white-space: nowrap;}.tableseparator {	height: 6px;}.grasElem {	font-weight: bold;}.rigthElem {	text-align: right;}.bigTable {	border-collapse: collapse;	border: 1px solid black;	width: 70mm;	table-layout: fixed;}.playTable {	width: 100%;}hr.dashedline {	border-top: 2px dotted gray;	margin: 1px 4px;}.dashedlineSystem {	border-bottom: 2px dotted gray}.dashedline {	border-top: 2px dotted gray;	margin: 2px 5px;}.dashedBorder {	border-bottom: dotted;	border-bottom-width: 2px;	border-bottom-color: gray;}.dashedlineBold {	border: none;	border-bottom: dotted;	border-bottom-width: 2px;	border-bottom-color: black;}.centerElem {	text-align: center;}.blackBorder {	border-bottom: 1px solid black;}.miseTable td {	font-size: 14.4pt;	font-family: arial;}#bonusmin, #bonusmax {	font-size: 12.8pt;	font-family: arial;}._96pt {	font-family: arial;	font-size: 9.6pt;}._22_4pt {	font-size: 22.4pt;	font-family: arial;	font-weight: bold}._8pt {	font-size: 8pt;	font-family: arial;}.sysTable th td {	font-size: 8.8pt;	font-family: arial;}';
 var cssRest='html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {    margin: 0;    padding: 0;    border: 0;    font-size: 100%;    font: inherit;    vertical-align: baseline;} article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {    display: block;}body {    line-height: 1;}ol, ul {    list-style: none;}blockquote, q {    quotes: none;}blockquote:before, blockquote:after,q:before, q:after {    content: "";    content: none;}table {    border-collapse: collapse;    border-spacing: 0;}';
@@ -41,6 +24,7 @@ function addGlobalStyle(css) {
 addGlobalStyle(cssStyle);
 
 jQuery(function ($){
+    console.log("file runnnnn");
     //addButtonPrintData();
     //$("#s_w_PC_cCoupon_btnStampaSco").attr('onclick', '');
     //$("[id$='w_PC_cCoupon_lnkAvanti']").attr("href", "javascript:;");
@@ -49,15 +33,19 @@ jQuery(function ($){
 });
 
 //Ok button
+//s_w_PC_cCoupon_lnkAvanti
 $(document).on("click", "[id$='w_PC_cCoupon_lnkAvanti']", function(){
 	generateSheetNumber();
     if($("[id$='w_PC_cCoupon_tdMultipla'].sel").length){  
+        console.log("simpleeeeeeeeeeee");
         printSimpleSheet();       
     }else if($("[id$='w_PC_cCoupon_tdSistema'].sel").length){
        printSystmeSheet();
     }else{
         printMultupleSheet();
     }
+    $("#mysheetid").hide();
+    console.log("sheet is created");
 });
 
 //Comfirm button
@@ -77,7 +65,7 @@ $(document).on("click", "[id$='w_PC_cCoupon_lnkConferma']", function(){
 
 //Printt button
 $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
-    
+    /*
     var currentSheet = $("#mysheetid").html();
     var updatedObj = {
                 "today": currentSheet,
@@ -97,11 +85,10 @@ $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
                     $("#data").val(json);
                 }
             });
+            */
    printSheet('#mysheetid');    
    window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
 });
-
-function saveSheetInMyJson(key,value)
 
 function printSystmeSheet(){
 
@@ -162,7 +149,7 @@ $(".CpnTipoSisRiep.sel").each(function(ind, flod){
    var headerTableSystem='<tr > <td> <table class="playTable bordertop sysTable"><tr class="borderBotton"><th class="textAlighLeft">TYPE</th><th align="center">JOU&#201;</th><th class="rightElem autowidthElem">GAIN POTENTIEL</th></tr>'+allSystemPlay+'</table></td>	</tr>';
    //<div class="tableseparator"> </div>
    var reglementText="<tr><td> </td></tr>	<tr><td>Ce reçu de transmission données est valide</td></tr><tr><td> 			seulement si le processus qui a apporté à son</td></tr><tr><td>			émission a eu lien selon le réglement général</td></tr><tr><td>			(exposé et consultable sur le site) auquel le reçu, et</td></tr><tr><td>			le sous-jacent rapport Joueur déclare, en acceptant ce</td></tr><tr><td>			reçu, qu'il a une connaissance appropriée du</td></tr><tr><td>		réglement, dont confirme l'acceptation. Les gains</td></tr><tr><td>		potentiels qui sont indiqués sur ce coupon peuvent</td></tr><tr><td>			être considérés seulement comme le guide, le calcul</td></tr><tr><td>			final peut être différent.</td></tr>";			
-   allTrTableEventsHtmlStr=allTrTableEventsHtmlStr+headerTableSystem+'<table class="bigTable">	<div class="tableseparator"> </div><tr>		<td class="centerElem dashedBorder _8pt">Date <span id="datesubmit">datesubmit</span></td>	</tr>	<tr>		<td><div class="tableseparator"></div><table class="playTable miseTable">				<tr class="centerElem grasElem "></tr>				<tr>					<td class="grasElem" width="1px">Mise</td>					<td class="grasElem"><hr class="dashedlineBold" /></td>					<td class="rigthElem grasElem autowidthElem"><span						id="miseMoney">miseMoney</span></td>				</tr>			</table></td>	</tr></table><div class="tableseparator"> </div><table class="bigTable">	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">BONUS</td>	</tr>	<tr class="blackBorder">		<td><table class="playTable">				<tr class="centerElem grasElem "></tr>				<tr>					<td class="grasElem" width="1px"><span id="bonusmin">bonusmin</span></td>					<td class="rigthElem grasElem" width="1px"><span id="bonusmax">bonusmax</span></td>				</tr>			</table></td>	</tr>	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">GAIN POTENTIEL MINIMUM</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _22_4pt">‖‖ <span id="gainpotentielmin">gainpotentiel</span> ‖‖		</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">GAIN POTENTIEL MAXIMUM</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _22_4pt">|||| <span id="gainpotentielmax">gainpotentiel</span> ||||</td>	</tr></table><div class="tableseparator"> </div><table class="bigTable _8pt centerElem">'+reglementText+'	<tr>		<td class="centerElem imgfooter"><img src="'+codebareurl+'"></td>	</tr></table>';
+   allTrTableEventsHtmlStr=allTrTableEventsHtmlStr+headerTableSystem+'<table class="bigTable">	<div class="tableseparator"> </div><tr>		<td class="centerElem dashedBorder _8pt">Date <span id="datesubmit">datesubmit</span></td>	</tr>	<tr>		<td><div class="tableseparator"></div><table class="playTable miseTable">				<tr class="centerElem grasElem "></tr>				<tr>					<td class="grasElem" width="1px">Mise</td>					<td class="grasElem"><hr class="dashedlineBold" /></td>					<td class="rigthElem grasElem autowidthElem"><span						id="miseMoney">miseMoney</span></td>				</tr>			</table></td>	</tr></table><div class="tableseparator"> </div><table class="bigTable">	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">BONUS</td>	</tr>	<tr class="blackBorder">		<td><table class="playTable">				<tr class="centerElem grasElem "></tr>				<tr>					<td class="grasElem" width="1px"><span id="bonusmin">bonusmin</span></td>					<td class="rigthElem grasElem" width="1px"><span id="bonusmax">bonusmax</span></td>				</tr>			</table></td>	</tr>	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">GAIN POTENTIEL MINIMUM</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _22_4pt">‖‖ <span id="gainpotentielmin">gainpotentiel</span> ‖‖		</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _96pt grasElem">GAIN POTENTIEL MAXIMUM</td>	</tr>	<tr class="blackBorder">		<td class="centerElem _22_4pt">‖‖ <span id="gainpotentielmax">gainpotentiel</span> ‖‖</td>	</tr></table><div class="tableseparator"> </div><table class="bigTable _8pt centerElem">'+reglementText+'	<tr>		<td class="centerElem imgfooter"><img src="'+codebareurl+'"></td>	</tr></table>';
 
     
     if( $('#mysheetid').length )       
@@ -408,12 +395,4 @@ function printSimpleSheetPop(data){
         mywindow.close();
 
         return true;
-}
-
-function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
-     document.body.innerHTML = printContents;
-     window.print();
-     document.body.innerHTML = originalContents;
 }
