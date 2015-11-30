@@ -170,8 +170,8 @@ $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
             });
 		 
 	});
-   printSheet('#mysheetid');    
-   window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
+  // printSheet('#mysheetid');    
+  // window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
 });
 
 function printSystmeSheet(){
