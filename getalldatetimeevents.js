@@ -1,24 +1,4 @@
-/*
-// ==UserScript==
-// @name getDateTimeAllEventsByPage
-// @namespace planetfake
-// @version 0.1
-// @grant        none
-// @description Opens all links in the CodeProject newsletter 
-// @match  http://www.planetwin365.com/Sport/OddsAsync.aspx?EventID*
-// @copyright 2012+, hibbard.eu
-// @require http://code.jquery.com/jquery-latest.js
-// ==/UserScript==
 
-jQuery(function ($){
-    var isCleared= localStorage.getItem('isCleared');
-    var allPagesNumber= parseInt(localStorage.getItem('allPagesNumber'),10);
-    var loadedPagesNumber=parseInt(localStorage.getItem('loadedPagesNumber'),10);
-    if(loadedPagesNumber < allPagesNumber){
-         setAllEventsinStorage();
-    }
-});
-*/
 function setAllEventsinStorage(){
     var allevents= new Array();
     $(".dgItem , .dgAItem").each(function(i, obj){
