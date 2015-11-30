@@ -5,10 +5,89 @@ var cssRest='html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h
 var imgurl='http://www.imageno.com/thumbs/20151020/01m3gvdazhzv.jpg';//'https://app.box.com/representation/file_version_40849338185/image_2048/1.png';
 var codebareurl='http://www.imageno.com/thumbs/20151020/uby2sq2w4uc9.jpg';//'https://app.box.com/representation/file_version_40849579053/image_2048/1.png';
 var sheetCodeNumber="";
+var sheetIdNumber="";
+var sheetCost="";
 
 function generateSheetNumber(){
    var nowdateNumber = new Date();
-   sheetCodeNumber =nowdateNumber.getMinutes() +""+ nowdateNumber.getSeconds()+""+nowdateNumber.getHours();
+   var minuteStr;
+   var secondeStr;
+   var hourStr;
+   var dayStr;
+   var monthStr;
+   //minute
+   if(nowdate.getMinutes()<10){
+	   minuteStr="0"+nowdate.getMinutes();
+   }else{
+	   minuteStr=nowdate.getMinutes();
+   }
+   //second
+   if(nowdate.getSeconds()<10){
+	   secondeStr="0"+nowdate.getSeconds();
+   }else{
+	   secondeStr=nowdate.getSeconds();
+   }
+   //hour
+   if(nowdate.getHours()<10){
+	   hourStr="0"+nowdate.getHours();
+   }else{
+	   hourStr=nowdate.getHours();
+   }
+   //day
+   if(nowdate.getDate()<10){
+	   dayStr="0"+nowdate.getDate();
+   }else{
+	   dayStr=nowdate.getDate();
+   }
+   //month
+   if(nowdate.getMonth()<9){
+	   monthStr="0"+(nowdate.getMonth()+1);
+   }else{
+	   monthStr=(nowdate.getMonth()+1)
+   }
+   sheetCodeNumber =minuteStr +""+secondeStr+""+hourStr;
+   sheetIdNumber=dayStr+""+monthStr+""+nowdate.getFullYear()+sheetCodeNumber;
+}
+function generateSubmitDate(){
+	var nowdate = new Date();
+   var minuteStr;
+   var secondeStr;
+   var hourStr;
+   
+   var dayStr;
+   var monthStr;
+   //minute
+   if(nowdate.getMinutes()<10){
+	   minuteStr="0"+nowdate.getMinutes();
+   }else{
+	   minuteStr=nowdate.getMinutes();
+   }
+   //second
+   if(nowdate.getSeconds()<10){
+	   secondeStr="0"+nowdate.getSeconds();
+   }else{
+	   secondeStr=nowdate.getSeconds();
+   }
+   //hour
+   if(nowdate.getHours()<10){
+	   hourStr="0"+nowdate.getHours();
+   }else{
+	   hourStr=nowdate.getHours();
+   }
+   //day
+   if(nowdate.getDate()<10){
+	   dayStr="0"+nowdate.getDate();
+   }else{
+	   dayStr=nowdate.getDate();
+   }
+   //month
+   if(nowdate.getMonth()<9){
+	   monthStr="0"+(nowdate.getMonth()+1);
+   }else{
+	   monthStr=(nowdate.getMonth()+1)
+   }
+	var submitDate = dayStr+"/"+monthStr+"/"+nowdate.getFullYear()+" "+hourStr + ":" + minuteStr + ":" + secondeStr;
+	return submitDate;
 }
 
 function addGlobalStyle(css) {
@@ -23,21 +102,11 @@ function addGlobalStyle(css) {
 
 addGlobalStyle(cssStyle);
 
-jQuery(function ($){
-    console.log("file runnnnn");
-    //addButtonPrintData();
-    //$("#s_w_PC_cCoupon_btnStampaSco").attr('onclick', '');
-    //$("[id$='w_PC_cCoupon_lnkAvanti']").attr("href", "javascript:;");
-   // $("[id$='w_PC_cCoupon_lnkConferma']").attr("href", "javascript:;");
-    
-});
-
 //Ok button
 //s_w_PC_cCoupon_lnkAvanti
 $(document).on("click", "[id$='w_PC_cCoupon_lnkAvanti']", function(){
 	generateSheetNumber();
     if($("[id$='w_PC_cCoupon_tdMultipla'].sel").length){  
-        console.log("simpleeeeeeeeeeee");
         printSimpleSheet();       
     }else if($("[id$='w_PC_cCoupon_tdSistema'].sel").length){
        printSystmeSheet();
@@ -51,7 +120,6 @@ $(document).on("click", "[id$='w_PC_cCoupon_lnkAvanti']", function(){
 //Comfirm button
 $(document).on("click", "[id$='w_PC_cCoupon_lnkConferma']", function(){
     $("[id$='w_PC_cCoupon_lnkConferma']").attr("href", "javascript:;");
-   //  printSheet('#mysheetid');//test
     //create html print div
     var nowdateTime = new Date();
     var sheetTimePrint =nowdateTime.getHours()+":"+nowdateTime.getMinutes();  
@@ -65,27 +133,26 @@ $(document).on("click", "[id$='w_PC_cCoupon_lnkConferma']", function(){
 
 //Printt button
 $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
-    /*
-    var currentSheet = $("#mysheetid").html();
-    var updatedObj = {
-                "today": currentSheet,
-                "key2": "updated value2"
-            };
-            var updatedData = JSON.stringify(updatedObj);
-
-            // do update
-            $.ajax({
+    
+	var updatedData='empty';
+	$.get("https://api.myjson.com/bins/2gmih", function(data, textStatus, jqXHR) {
+		var currentvalue=data.allsheet;
+		currentvalue=currentvalue+","+sheetIdNumber+":"+sheetCost;
+		var updatedObj = {
+                "allsheet": currentvalue
+        };
+	    updatedData = JSON.stringify(updatedObj);
+			$.ajax({
                 url: "https://api.myjson.com/bins/2gmih",
                 type: "PUT",
                 data: updatedData,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data, textStatus, jqXHR) {
-                    var json = JSON.stringify(data);
-                    $("#data").val(json);
                 }
             });
-            */
+		 
+	});
    printSheet('#mysheetid');    
    window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
 });
@@ -191,12 +258,13 @@ $(".CpnTipoSisRiep.sel").each(function(ind, flod){
    var miseMoneyTotale=$("[id$='w_PC_cCoupon_txtImportoSis']").val();
    
    var miseMoneyFloat=parseFloat(miseMoneyTotale.replace(',','.'));
-   var miseMoneyStr=miseMoneyFloat.toFixed(2).replace('.',',');		
+   var miseMoneyStr=miseMoneyFloat.toFixed(2).replace('.',',');	
+   sheetCost=miseMoneyStr;  
    var miseMoney=miseMoneyStr+' €';
    $("#miseMoney").html(miseMoney);
    //submit date
    var nowdate = new Date();
-   var submitDate = nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
+   var submitDate = generateSubmitDate();//nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
    $("#datesubmit").html(submitDate);
 }
 function printMultupleSheet(){
@@ -288,10 +356,11 @@ $(".CItem").each(function(i, obj){
    var miseMoneyTotaleStr=miseMoneyTotaleFloat.toFixed(2).replace('.',',');	
    //
    var miseMoney=miseMoneyByProbStr+' x '+miseMoneyNumberProb+' = '+miseMoneyTotaleStr+' €';
+   sheetCost=miseMoney;
    $("#miseMoney").html(miseMoney);
    //submit date
    var nowdate = new Date();
-   var submitDate = nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
+   var submitDate = generateSubmitDate();//nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
    $("#datesubmit").html(submitDate);
     
 }
@@ -366,11 +435,12 @@ $(".CItem").each(function(i, obj){
    //miseMoney
    var miseMoney=$("[id$='w_PC_cCoupon_txtImporto']").val(); 
    var miseMoneyFloat=parseFloat(miseMoney.replace(',','.'));
-   var miseMoneyStr=miseMoneyFloat.toFixed(2).replace('.',',');		
+   var miseMoneyStr=miseMoneyFloat.toFixed(2).replace('.',',');	
+   sheetCost=miseMoneyStr;
    $("#miseMoney").html(miseMoneyStr);
    //submit date
    var nowdate = new Date();
-   var submitDate = nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
+   var submitDate = generateSubmitDate();//nowdate.getDate()+"/"+(nowdate.getMonth()+1)+"/"+nowdate.getFullYear()+" "+nowdate.getHours() + ":" + nowdate.getMinutes() + ":" + nowdate.getSeconds();
    $("#datesubmit").html(submitDate);
 }
 
