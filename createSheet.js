@@ -9,7 +9,7 @@ var sheetIdNumber="";
 var sheetCost="";
 
 function generateSheetNumber(){
-   var nowdateNumber = new Date();
+   var nowdate = new Date();
    var minuteStr;
    var secondeStr;
    var hourStr;
