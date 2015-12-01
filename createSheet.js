@@ -345,10 +345,10 @@ $(".CItem").each(function(i, obj){
    $("#pourcentage").html(" "+pourcentage);
 	//gain bonus 
       //bonus min
-      var gainBonusMin='Max '+$("[id$='w_PC_cCoupon_lblBonusMinDI']").text()+' €';
+      var gainBonusMin='Min '+$("[id$='w_PC_cCoupon_lblBonusMinDI']").text()+' €';
 	  $("#bonusmin").html(gainBonusMin);
 	 //bonus max
-      var gainBonusMax='Min '+$("#s_w_PC_cCoupon_lblBonusMaxDI").text()+' €';
+      var gainBonusMax='Max '+$("#s_w_PC_cCoupon_lblBonusMaxDI").text()+' €';
       $("#bonusmax").html(gainBonusMax);
    //gainpotentiel
       var gainPotentielmin=' € '+$("[id$='w_PC_cCoupon_lblVincitaPotMin']").text();
