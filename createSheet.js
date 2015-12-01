@@ -149,12 +149,9 @@ $(document).on("click", "[id$='w_PC_cCoupon_lnkConferma']", function(){
 $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
     
 	var updatedData='empty';
-	console.log("set data in json file");
 	$.get("https://api.myjson.com/bins/2gmih", function(data, textStatus, jqXHR) {
 		var currentvalue=data.allsheet;
-		console.log(currentvalue);
-		currentvalue=currentvalue+","+sheetIdNumber+":"+sheetCost;
-		console.log(currentvalue);
+		currentvalue=currentvalue+";"+sheetIdNumber+":"+sheetCost;
 		var updatedObj = {
                 "allsheet": currentvalue
         };
@@ -170,8 +167,8 @@ $(document).on("click", "[id$='w_PC_cCoupon_btnStampaSco']", function(){
             });
 		 
 	});
-  // printSheet('#mysheetid');    
-  // window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
+   printSheet('#mysheetid');    
+   window.location.href = "http://www.planetwin365.com/Sport/Groups.aspx?TipoVis=1";
 });
 
 function printSystmeSheet(){
